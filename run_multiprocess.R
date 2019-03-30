@@ -28,6 +28,3 @@ options(MulticoreParam=quote(MulticoreParam(workers = 4)))
 MulticoreParam = MulticoreParam(workers = 4)
 # bpnworkers(x = MulticoreParam)
 bplapply(, FUN = , BPPARAM = MulticoreParam)
-
-
-
