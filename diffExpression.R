@@ -46,13 +46,13 @@ FC <- exp(aaa_uc$table$logFC)
 FDR <- p.adjust(aaa_uc$table$PValue,method = "BH")
 absFC <- abs(FC)
 logFC <- aaa_uc$table$logFC
-# plot result
-out_dir <- getwd()
-pdf(paste(out_dir, "/res/res.pdf", sep=""))
-plotSmear(aaa_uc, de.tags=detags)
-abline(h=c(-1, 1), col="blue")
-EnhancedVolcano(volcanodata,x = "logFC",y = "FDR",lab = rownames(volcanodata),ylim = c(0,6))
-dev.off()
+# # plot result
+# out_dir <- getwd()
+# pdf(paste(out_dir, "/res/res.pdf", sep=""))
+# plotSmear(aaa_uc, de.tags=detags)
+# abline(h=c(-1, 1), col="blue")
+# EnhancedVolcano(volcanodata,x = "logFC",y = "FDR",lab = rownames(volcanodata),ylim = c(0,6))
+# dev.off()
 
 # Import data
 volcanodata <- data.frame(GENE,Pvalue,FC,FDR,absFC,logFC)
@@ -61,7 +61,7 @@ colnames(volcanodata)
 colnames(volcanodata) <- c("Gene","pvalue","FC","FDR","absFC","logFC")
 # Set transcript names as row names
 row.names(volcanodata)<-make.names(volcanodata[,1], unique=TRUE)
-EnhancedVolcano(volcanodata,x = "logFC",y = "FDR",lab = rownames(volcanodata),ylim = c(0,6))
+EnhancedVolcano(volcanodata,x = "logFC",y = "FDR",lab = rownames(volcanodata),ylim = c(0,6), FCcutoff = 1)
 
 ### multigroup output txt
 # all_combination <- combn(1:10,2)  # free combination

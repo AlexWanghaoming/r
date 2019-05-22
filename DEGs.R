@@ -16,7 +16,7 @@ y <- calcNormFactors(y,method = "TMM")
 y <- estimateCommonDisp(y, verbose = TRUE)
 y <- estimateTagwiseDisp(y) 
 aaa <- exactTest(y,pair = c(1,3))
-topTags(aaa)
+# topTags(aaa)
 decideTestsDGE()
 calcNormFactors
 
