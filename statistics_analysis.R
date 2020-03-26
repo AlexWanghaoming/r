@@ -89,4 +89,31 @@ plotmeans(height~interaction(concentration,type, sep=" "),data = df1,
 library(HH)
 interaction2wt(height~concentration*type, data = df1)
 
+## MM +ade  #生长速率 t-test 统计功效
+wi <- c(4.1,5.1,4.5,4.6,4.218,4.6,5.3,4.8,4.7)
+mu <- c(2.7,2.8,2.9,0.7,0.75,0,2.9,3,2.7)
+t.test(wi,mu)
+library(pwr)
+library(effsize)
+cohen.d(wi,mu)
+pwr.t.test(n=9,d=3.032318,sig.level=0.05, type="two.sample",alternative="two.sided")
+pwr.t.test(d=0.8,sig.level=0.05,power = 0.9,type="two.sample",alternative="two.sided")
+
+## 负二项分布negative binomial distribution 描述一系列伯努利实验中，单次成功的概率是p, 成功指定次数（size）时（之前），失败次数的离散分布
+dnbinom(0:2, size=4, p=0.8) # 运动员夺冠的概率时0.8， 该运动员获得4个冠军前，发生0，1，2次失败的概率
+pnbinom(2, 4, 0.8) # 运动员夺冠的概率时0.8， 该运动员获得4个冠军前，至多发生两次失败的累计概率
+qnbinom(0.9, 4, 0.8)  #百分之90的情况下，该运动员至多失败几次
+rnbinom(1000, 4, 0.8) # 1000次模拟，每次失败的次数
+
+## 二项分布是 进行size次伯努利实验，单次成功概率是p，成功x次的分布
+size = 6
+p = 0.1
+dbinom(x=2, size, p)
+pbinom()
+qnbinom()
+rnbinom()
+
+
+
+
 

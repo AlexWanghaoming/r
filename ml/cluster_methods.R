@@ -1,3 +1,37 @@
+##  玉米分类数据集（3类效果最佳）
+aa <- read.csv("/Users/alexwang/Desktop/maize_cluster.csv", header = F)
+a <- scale(aa) # 标准化
+
+colnames(a) <- c("root_length","shoot_DW","grain_N")
+rownames(a) <- c("BMY","JHH","ZD2","TK5","ND108","ZD958")
+dd2 <- dist(a) # 计算距离矩阵
+
+# 分别用三种方法层次聚类
+hc_ward1 <- hclust(dd2,method = "ward.D")
+hc_average1 <- hclust(dd2,method = "average")
+hc_centroid1 <- hclust(dd2, method = "centroid")
+p1 <- plot(hc_ward1,hang = 1)
+p2 <- plot(hc_average1, hang = 1)
+p3 <- plot(hc_centroid1, hang=1)
+
+## kmeans聚类
+library(fpc)
+kk <- kmeans(a,centers = 3)
+plotcluster(scale(bb), kk1$cluster) # kmeans绘图
+# kmeans聚类画出轮廓系数图评估K的最佳取值
+
+K <- 2:4 # 分别计算 K取2，3，4哪个最优
+round <- 30  # 30次防治局部最优
+rst <- sapply(K, function(i){  
+  print(paste("K=",i))
+  mean(sapply(1:round,function(r){
+    print(paste("Round",r))
+    result <- kmeans(a, i)
+    stats <- cluster.stats(dist(a), result$cluster)
+    stats$avg.silwidth
+  }))
+})
+plot(K, rst, type='l', main='outline & R relation', ylab='outline coefficient') # 轮廓系数绘图
 
 ## iris dataset
 # k-means cluster
